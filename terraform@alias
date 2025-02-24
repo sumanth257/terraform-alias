@@ -1,0 +1,46 @@
+# terraform-alias
+*********create two instances in diff regions' using alias keyword *********
+Two provider "aws" blocks → One for us-east-1 and one for us-west-2, each with an alias.
+1) region -One
+     resource "aws_instance" "myec2"{
+        ami=" "
+        instance_type="  "
+     tags={
+        Name="  "
+       }
+   }
+2) region -two
+      resource "aws_instance"  "myec2usw2"{
+          provide="aws.usw2"
+          ami=" "
+   instance_type=" "
+   tage={
+     Name=" "
+   }
+}
+
+Then you  provide the provider "aws" files
+
+provider "aws"{
+    region="us-east-1"
+}
+
+provider "aws"{
+    alias="usw2"
+    region="us-west-2"
+}
+
+
+***************STEPS TO DEPLOY*******************
+
+1. Initialize Terraform
+   ----> terraform init
+2. Validate the code
+   ----> terraform validate
+3.Plan the deployment
+   ----> terraform plan
+4.Apply changes
+   ---->terraform apply
+
+ CONCLUSION:  Using Terraform with alias providers allows you to deploy EC2 instances in different AWS regions within the same configuration. By defining multiple provider "aws" blocks with aliases, you can specify which provider each resource should use. This ensures that your infrastructure is deployed efficiently across regions while keeping your code modular and scalable. 🚀
+
